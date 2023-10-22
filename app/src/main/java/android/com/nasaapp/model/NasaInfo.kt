@@ -5,9 +5,15 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class NasaInfo(
-    val name : String,
-    val type: String,
-    val description: String,
-    @SerialName(value = "img_src")
-    val imgSrc : String
+    val copyright : String? = null,
+    val date : String,
+    val explanation: String,
+    @SerialName(value = "hdurl")
+    val hdUrl : String,
+    @SerialName(value = "media_type")
+    val mediaType: String,
+    @SerialName(value = "service_version")
+    val serviceVersion : String,
+    val title: String,
+    val url: String,
 )

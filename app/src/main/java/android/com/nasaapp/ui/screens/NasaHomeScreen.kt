@@ -77,7 +77,7 @@ fun NasaCard(
     ) {
         AsyncImage(
             model = ImageRequest.Builder(context = LocalContext.current)
-                .data(nasaInfo.imgSrc)
+                .data(nasaInfo.url)
                 .crossfade(true)
                 .build(),
             contentDescription = null,
@@ -109,7 +109,7 @@ fun NasaListCard(
 @Preview
 @Composable
 fun NasaListPreview() {
-    val mockdata = List(10) { NasaInfo(".", ".", ".", ".") }
+    val mockdata = List(10) { NasaInfo(".", ".", ".", ".", ".", ".", ".", ".") }
     NasaAppTheme {
         NasaListCard(nasaListInfo = mockdata, modifier = Modifier.fillMaxWidth())
     }

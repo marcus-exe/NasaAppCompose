@@ -2,8 +2,15 @@ package android.com.nasaapp.network
 
 import android.com.nasaapp.model.NasaInfo
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 interface NasaApiService {
-    @GET("amphibians")
-    suspend fun getInfo(): List<NasaInfo>
+    @GET("planetary/apod")
+    suspend fun getInfo(
+        @Query("api_key")
+        apiKey: String = "VwrcLN9fTKPtvhzmosmM1LtrykObrzwdHhfwhcsd",
+        @Query("count")
+        count: Int = 10
+    ): List<NasaInfo>
+
 }
