@@ -10,7 +10,7 @@ interface NasaApiService {
         @Query("api_key")
         apiKey: String = "VwrcLN9fTKPtvhzmosmM1LtrykObrzwdHhfwhcsd",
         @Query("count")
-        count: Int = 10
+        count: Int = 20
     ): List<NasaInfo>
 
 }

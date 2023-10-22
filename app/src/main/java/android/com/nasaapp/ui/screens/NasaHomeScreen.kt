@@ -3,6 +3,7 @@ package android.com.nasaapp.ui.screens
 import android.com.nasaapp.R
 import android.com.nasaapp.model.NasaInfo
 import android.com.nasaapp.ui.theme.NasaAppTheme
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -12,6 +13,9 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
+import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
+import androidx.compose.foundation.lazy.staggeredgrid.items
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -35,7 +39,7 @@ fun HomeScreen(
 ) {
     when (nasaUiState) {
         is NasaUiState.Loading -> LoadingScreen(modifier)
-        is NasaUiState.Success -> NasaListCard(nasaListInfo = nasaUiState.info)
+        is NasaUiState.Success -> NasaGridCard(nasaListInfo = nasaUiState.info)
         is NasaUiState.Error -> ErrorScreen(retryAction, modifier)
     }
 }
@@ -89,29 +93,37 @@ fun NasaCard(
     }
 }
 
+
+
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun NasaListCard(
+fun NasaGridCard(
     nasaListInfo: List<NasaInfo>,
     modifier: Modifier = Modifier
-) {
+){
     val scrollState = rememberLazyListState()
-
-    LazyColumn(
-        contentPadding = PaddingValues(12.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
-    ) {
-        items(nasaListInfo) {
-            NasaCard(nasaInfo = it)
+    LazyVerticalStaggeredGrid(
+        columns = StaggeredGridCells.Adaptive(190.dp),
+        verticalItemSpacing = 4.dp,
+        horizontalArrangement = Arrangement.spacedBy(4.dp),
+        content = {
+            items(nasaListInfo) {
+                NasaCard(nasaInfo = it)
+            }
         }
-    }
+    )
+
 }
+
+
+
 
 @Preview
 @Composable
 fun NasaListPreview() {
     val mockdata = List(10) { NasaInfo(".", ".", ".", ".", ".", ".", ".", ".") }
     NasaAppTheme {
-        NasaListCard(nasaListInfo = mockdata, modifier = Modifier.fillMaxWidth())
+        NasaGridCard(nasaListInfo = mockdata, modifier = Modifier.fillMaxWidth())
     }
 }
 

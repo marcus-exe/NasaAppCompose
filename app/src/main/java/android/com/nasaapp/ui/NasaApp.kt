@@ -13,6 +13,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -21,7 +22,8 @@ fun NasaApp() {
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
 
     Scaffold(
-        topBar = { topAppBar(scrollBehavior = scrollBehavior) }
+        topBar = { topAppBar(scrollBehavior = scrollBehavior) },
+        modifier = Modifier.padding(4.dp)
     ) {
         Surface(
             modifier = Modifier
